@@ -3,5 +3,8 @@ services:
     name: pii-redactor
     env: python
     rootDir: pii_redactor
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.4
     buildCommand: pip install -r requirements.txt && python -m spacy download en_core_web_sm
     startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
