@@ -1,0 +1,287 @@
+:root {
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --accent: #0ea5e9;
+    --bg-dark: #0f172a;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.background-animation {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.15), transparent 30%);
+    animation: rotate 20s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.highlight {
+    color: transparent;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.upload-box {
+    border: 2px dashed var(--glass-border);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    background: rgba(255,255,255,0.02);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-box:hover, .upload-box.dragover {
+    border-color: var(--primary);
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.icon {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.upload-box:hover .icon {
+    transform: translateY(-5px);
+}
+
+.upload-box h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.upload-box p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    background: var(--glass-border);
+    color: var(--text-main);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.file-name {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--accent) !important;
+    font-weight: 600;
+}
+
+.action-section {
+    margin-top: 2rem;
+}
+
+.btn-glow {
+    position: relative;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    width: 100%;
+}
+
+.btn-glow::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-glow:hover::before {
+    left: 100%;
+}
+
+.btn-glow:disabled {
+    background: var(--glass-border);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.spinner {
+    display: none;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-glow.loading .btn-text {
+    opacity: 0;
+}
+
+.btn-glow.loading .spinner {
+    display: block;
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.status-message {
+    margin-top: 1rem;
+    font-size: 1rem;
+    min-height: 24px;
+    transition: color 0.3s ease;
+}
+.status-success { color: #10b981; }
+.status-error { color: #ef4444; }
+
+/* Download Section */
+.download-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+    animation: fadeIn 0.5s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.download-section h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+}
+
+.download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.download-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 1rem;
+    text-decoration: none;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.download-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+}
+
+.docx-card:hover { border-color: #3b82f6; }
+.report-card:hover { border-color: #10b981; }
+.json-card:hover { border-color: #f59e0b; }
+
+.dl-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.dl-info h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.dl-info p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}

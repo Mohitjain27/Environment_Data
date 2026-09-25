@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PII Redactor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <header>
+            <h1>Shield<span class="highlight">PII</span></h1>
+            <p>Intelligent, Format-Preserving Redaction</p>
+        </header>
+
+        <main>
+            <div class="upload-box" id="drop-zone">
+                <input type="file" id="file-input" accept=".docx" hidden>
+                <div class="icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                </div>
+                <h2>Drag & Drop your .docx file</h2>
+                <p>or</p>
+                <button class="btn-primary" id="browse-btn">Browse Files</button>
+                <p class="file-name" id="file-name"></p>
+            </div>
+
+            <div class="action-section">
+                <button class="btn-glow" id="redact-btn" disabled>
+                    <span class="btn-text">Redact Document</span>
+                    <div class="spinner" id="spinner"></div>
+                </button>
+            </div>
+
+            <div class="status-message" id="status-message"></div>
+
+            <div class="download-section hidden" id="download-section">
+                <h3>Ready for Download</h3>
+                <div class="download-grid">
+                    <a id="download-docx" href="#" class="download-card docx-card" download>
+                        <div class="dl-icon">📄</div>
+                        <div class="dl-info">
+                            <h4>Redacted DOCX</h4>
+                            <p>Cleaned document</p>
+                        </div>
+                    </a>
+                    <a id="download-report-md" href="#" class="download-card report-card" download>
+                        <div class="dl-icon">📊</div>
+                        <div class="dl-info">
+                            <h4>Evaluation Report</h4>
+                            <p>Markdown metrics</p>
+                        </div>
+                    </a>
+                    <a id="download-report-json" href="#" class="download-card json-card" download>
+                        <div class="dl-icon">⚙️</div>
+                        <div class="dl-info">
+                            <h4>Evaluation JSON</h4>
+                            <p>Raw data format</p>
+                        </div>
+                    </a>
+                
+                    <a id="download-project-zip" href="/api/download-project" class="download-card zip-card" download>
+                        <div class="dl-icon">📦</div>
+                        <div class="dl-info">
+                            <h4>Project ZIP</h4>
+                            <p>Full source code</p>
+                        </div>
+                    </a>
+                
+                    <a id="download-eval-doc" href="/api/download-evaluation-doc" class="download-card docx-card" download>
+                        <div class="dl-icon">📘</div>
+                        <div class="dl-info">
+                            <h4>Evaluation Doc</h4>
+                            <p>Metrics & Strategy</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
